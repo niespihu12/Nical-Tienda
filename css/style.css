@@ -619,6 +619,32 @@ a {
 
 }
 
+/* boton */
+.boton {
+    background-color: transparent;
+    border: none;
+}
 
+.buscador-productos {
+    display: flex;
+    justify-content: start;
 
-/* categorias */
+}
+
+.buscador-productos svg {
+    height: 2rem;
+
+}
+
+.buscar-producto__search{
+    border:1px solid var(--grisClaro);
+    height: 4rem;
+
+}
+
+@media (max-width:768px) {
+    .buscador-productos{
+        justify-content: center;
+    }
+    
+}

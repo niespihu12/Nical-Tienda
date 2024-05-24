@@ -5,7 +5,7 @@ require 'config/database.php';
 $db = new Database();
 $con = $db->conectar();
 
-$sql = $con->prepare("SELECT id, nombre, precio FROM productos WHERE activo=1 LIMIT 4");
+$sql = $con->prepare("SELECT id, nombre, precio FROM productos WHERE activo=1 ORDER BY id DESC LIMIT 4");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 

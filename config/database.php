@@ -1,4 +1,5 @@
 <?php
+    require __DIR__ . '/../vendor/autoload.php'; 
     class Database{
         private $hostname;
         private $database;

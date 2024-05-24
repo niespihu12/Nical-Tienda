@@ -23,6 +23,7 @@ if ($productos != null) {
 }
 
 $total = 0;
+
 ?>
 
 <!DOCTYPE html>
@@ -172,6 +173,9 @@ $total = 0;
         </div>
     </footer>
 
+    <?php
+    $total_dolares = $total * EXCHANGE_RATE;
+    ?>
 
     <script src="https://www.paypal.com/sdk/js?client-id=<?php echo CLIENT_ID; ?>&currency=<?php echo CURRENCY; ?>"></script>
     <script>
@@ -185,7 +189,7 @@ $total = 0;
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value: <?php echo $total; ?>,
+                            value: <?php echo number_format($total_dolares, 2, '.', ''); ?>,
 
                         }
                     }]
@@ -222,12 +226,6 @@ $total = 0;
             }
         }).render('#paypal-button-container')
     </script>
-
-
-
-
-
-
 </body>
 
 </html>

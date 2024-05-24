@@ -20,7 +20,13 @@ if (isset($_GET['category']) && in_array($_GET['category'], ['1', '2', '3'])) {
   $category_filter = "AND id_categoria = " . $_GET['category'];
 }
 
-$sql = $con->prepare("SELECT id, nombre, precio FROM productos WHERE activo=1 $category_filter ORDER BY $order_by");
+$search_filter = "";
+if (isset($_GET['search']) && !empty($_GET['search'])) {
+  $search = $_GET['search'];
+  $search_filter = "AND nombre LIKE '%" . $search . "%'";
+}
+
+$sql = $con->prepare("SELECT id, nombre, precio FROM productos WHERE activo=1 $category_filter $search_filter ORDER BY $order_by");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -36,7 +42,6 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="http://localhost/nical/css/style.css" type="text/css">
   <title>Tienda</title>
-
 </head>
 
 <body>
@@ -61,13 +66,21 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
   </header>
 
   <main class="contenedor">
-
-
-
     <h1 class="centrar-texto">Tienda</h1>
-
     <div class="organizar-productos">
       <div class="contenido Tienda">
+        <div class="buscador-productos">
+          <form method="GET" action="tienda.php">
+            <input type="text" name="search" placeholder="Buscar productos..." value="<?php if (isset($_GET['search'])) echo $_GET['search']; ?>" class="buscar-producto__search">
+            <button type="submit" class="boton">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                <path d="M21 21l-6 -6" />
+              </svg>
+            </button>
+          </form>
+        </div>
         <aside class="filtros">
           <h3>Categorías: </h3>
           <div class="categorias-estandar">
@@ -88,6 +101,8 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
             </select>
           </form>
         </div>
+
+
 
         <div class="grid">
           <?php foreach ($resultado as $row) { ?>
@@ -111,17 +126,8 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
             </div>
           <?php } ?>
         </div>
-
-
       </div>
-
     </div>
-
-
-
-
-
-
   </main>
 
   <footer class="footer" style="margin-top: 10rem;">

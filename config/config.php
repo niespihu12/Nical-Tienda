@@ -4,6 +4,7 @@
     define("KEY_TOKEN", "APR.wqc-354*");
     define("MONEDA","COP");
     session_start();
+    define('EXCHANGE_RATE', 0.00026);
 
 
     $num_cart = 0;
