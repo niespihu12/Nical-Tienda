@@ -48,7 +48,7 @@ Nical-Tienda es una aplicación web que permite a los usuarios navegar y comprar
 
 ---
 
-##USO
+## USO
 - Accede a la página principal de la tienda a través de tu navegador web.
 - Navega por el catálogo de camisas y agrega las deseadas al carrito de compras.
 - Procede al pago y sigue las instrucciones para completar la compra.
